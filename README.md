@@ -282,4 +282,4 @@ support.
 
 ## License
 
-No license has been added yet. Add a license before publishing the repository.
+KeyboardPanelBox is released under the [MIT License](LICENSE).
