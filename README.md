@@ -1,5 +1,7 @@
 # KeyboardPanelBox
 
+[![](https://jitpack.io/v/SaberArthur/KeyboardPanelBox.svg)](https://jitpack.io/#SaberArthur/KeyboardPanelBox)
+
 [中文文档](README_CN.md)
 
 <p align="center">
@@ -52,9 +54,6 @@ dependencies {
 ```
 
 ### JitPack
-
-After publishing a GitHub release or tag, the dependency will use a JitPack
-coordinate similar to:
 
 ```kotlin
 dependencyResolutionManagement {
