@@ -1,5 +1,7 @@
 # KeyboardPanelBox
 
+[English](README.md)
+
 <p align="center">
   <img src="image/demo.gif" width="320" alt="KeyboardPanelBox 示例" />
 </p>
@@ -62,11 +64,9 @@ dependencyResolutionManagement {
 
 ```kotlin
 dependencies {
-    implementation("com.github.yourname.KeyboardPanelBox:keyboardpanel:0.1.0")
+    implementation("com.github.SaberArthur.KeyboardPanelBox:keyboardpanel:0.1.0")
 }
 ```
-
-请把 `yourname` 和 `0.1.0` 替换成实际 GitHub 用户名和 tag。
 
 ## 基本用法
 
