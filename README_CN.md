@@ -64,13 +64,16 @@ dependencyResolutionManagement {
 
 ```kotlin
 dependencies {
-    implementation("com.github.SaberArthur.KeyboardPanelBox:keyboardpanel:0.1.0")
+    implementation("com.github.SaberArthur:KeyboardPanelBox:0.1.1")
 }
 ```
 
 ## 基本用法
 
 `KeyboardPanelBox` 只负责底部输入区域。输入栏上方的主体内容由使用方自己管理。
+
+`KeyboardPanelBox` 针对 `enableEdgeToEdge()` 模式设计。组件内部会自行根据 IME inset
+处理底部高度，因此 Activity 需要运行在 edge-to-edge 模式下，软键盘和自定义面板才能正确协同。
 
 ```kotlin
 val state = rememberKeyboardPanelState()
@@ -168,6 +171,11 @@ panel("emoji", height = 260.dp) {
 library 不关心 `emoji`、`menu`、`more` 的业务含义。它只会把 `showPanel(key)` 传入的 key 和已注册的 panel 匹配起来，然后使用这个 panel 声明的高度和内容。
 
 ## 重要注意事项
+
+请在 `enableEdgeToEdge()` 模式下使用 `KeyboardPanelBox`。
+
+`KeyboardPanelBox` 内部会自行根据 IME inset 管理底部高度。非 edge-to-edge 模式下，系统可能会因为软键盘 resize Activity，
+同时 `KeyboardPanelBox` 又应用了一次键盘高度，导致软键盘和底部面板看起来同时存在。
 
 不要给 `KeyboardPanelBox` 再套 `Modifier.imePadding()`。
 

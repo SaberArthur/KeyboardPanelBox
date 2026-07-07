@@ -67,7 +67,7 @@ dependencyResolutionManagement {
 
 ```kotlin
 dependencies {
-    implementation("com.github.SaberArthur.KeyboardPanelBox:keyboardpanel:0.1.0")
+    implementation("com.github.SaberArthur:KeyboardPanelBox:0.1.1")
 }
 ```
 
@@ -76,10 +76,18 @@ dependencies {
 `KeyboardPanelBox` only owns the bottom input area. The main content is managed
 by the caller.
 
+`KeyboardPanelBox` is designed for `enableEdgeToEdge()` mode. The component
+handles the IME bottom height itself, so the Activity should run in
+edge-to-edge mode for the keyboard and custom panels to coordinate correctly.
+
 ```kotlin
 val state = rememberKeyboardPanelState()
 
-Column(Modifier.fillMaxSize()) {
+Column(
+    modifier = Modifier
+        .fillMaxSize()
+        .navigationBarsPadding()
+) {
     Box(
         modifier = Modifier
             .weight(1f)
@@ -174,6 +182,13 @@ the key passed to `showPanel(key)` with the registered panel and uses that
 panel's declared height.
 
 ## Important Notes
+
+Use `KeyboardPanelBox` in `enableEdgeToEdge()` mode.
+
+`KeyboardPanelBox` manages the bottom height itself from IME insets. Without
+edge-to-edge, the platform may resize the Activity for the keyboard while
+`KeyboardPanelBox` also applies the keyboard height. That can make the keyboard
+and a bottom panel appear at the same time.
 
 Do not add `Modifier.imePadding()` to `KeyboardPanelBox`.
 
