@@ -1,7 +1,7 @@
 # KeyboardPanelBox
 
 [![](https://jitpack.io/v/SaberArthur/KeyboardPanelBox.svg)](https://jitpack.io/#SaberArthur/KeyboardPanelBox)
-
+1
 [中文文档](README_CN.md)
 
 <p align="center">
