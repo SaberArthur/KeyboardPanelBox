@@ -86,7 +86,7 @@ private fun KeyboardPanelDemo() {
                 DemoInputBar(state = state)
             },
         ) {
-            panel("emoji", height = 260.dp) {
+            panel("emoji", height = 600.dp) {
                 EmojiPanel()
             }
             panel("menu", height = 200.dp) {

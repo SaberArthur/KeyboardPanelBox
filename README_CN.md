@@ -64,7 +64,7 @@ dependencyResolutionManagement {
 
 ```kotlin
 dependencies {
-    implementation("com.github.SaberArthur:KeyboardPanelBox:0.1.1")
+    implementation("com.github.SaberArthur:KeyboardPanelBox:0.1.2")
 }
 ```
 

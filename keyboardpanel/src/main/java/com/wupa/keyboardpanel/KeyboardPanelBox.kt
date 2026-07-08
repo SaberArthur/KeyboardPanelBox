@@ -22,6 +22,7 @@ import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import kotlin.math.roundToInt
 
 @OptIn(ExperimentalComposeUiApi::class)
 @Composable
@@ -50,13 +51,26 @@ fun KeyboardPanelBox(
     val scope = KeyboardPanelScopeImpl().apply(panels)
     val currentPanel = scope.items.lastOrNull { item -> item.key == state.currentPanelKey }
     val targetPanelHeight = currentPanel?.height ?: state.defaultKeyboardHeight
+    val keyboardHoldHeight = if (state.holdBottomUntilKeyboard) {
+        val holdPx = with(density) { state.holdBottomHeight.roundToPx() }
+        val targetPx = keyboardHeight.lastPx.coerceAtLeast(1)
+        val heightPx = if (holdPx > targetPx && keyboardHeight.currentPx > 0) {
+            val progress = (keyboardHeight.currentPx.toFloat() / targetPx).coerceIn(0f, 1f)
+            (holdPx - (holdPx - targetPx) * progress).roundToInt()
+        } else {
+            maxOf(holdPx, keyboardHeight.currentPx)
+        }
+        with(density) { heightPx.toDp() }
+    } else {
+        keyboardHeight.current
+    }
 
     val animatedHeight by animateDpAsState(
         targetValue = when (state.mode) {
             KeyboardPanelMode.None -> 0.dp
             KeyboardPanelMode.Keyboard -> {
                 if (state.holdBottomUntilKeyboard) {
-                    maxOf(state.holdBottomHeight, keyboardHeight.current)
+                    keyboardHoldHeight
                 } else {
                     keyboardHeight.current
                 }
@@ -86,7 +100,7 @@ fun KeyboardPanelBox(
     val resolvedHeight = when (state.mode) {
         KeyboardPanelMode.Keyboard -> {
             if (state.holdBottomUntilKeyboard) {
-                maxOf(state.holdBottomHeight, keyboardHeight.current)
+                keyboardHoldHeight
             } else {
                 keyboardHeight.current
             }
